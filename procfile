@@ -1,0 +1,2 @@
+web: gunicorn files.wsgi
+web: python manage.py migrate && gunicorn files.wsg

@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>PhoneMarket | Premium Phone Shop Marketplace</title>
+  <!-- Google Fonts & simple CSS reset -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 (free icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f5f7fb;
+      color: #1e293b;
+      line-height: 1.5;
+    }
+
+    /* container utility */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .hello{
+    height:auto;
+    width:200px;
+    }
+
+    /* header & navigation */
+    .site-header {
+      background: white;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 2px 6px rgba(0,0,0,0.03);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(0px);
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      padding: 16px 0;
+      gap: 20px;
+    }
+
+    .logo h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #2563eb, #16a34a);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: -0.5px;
+    }
+
+    .logo span {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #4b5563;
+      background: none;
+      background-clip: unset;
+      -webkit-background-clip: unset;
+      color: #4b5563;
+      display: block;
+    }
+
+    .search-bar {
+      flex: 1;
+      max-width: 480px;
+      display: flex;
+      background: #f1f5f9;
+      border-radius: 60px;
+      overflow: hidden;
+      border: 1px solid #e2e8f0;
+      transition: all 0.2s;
+    }
+    .search-bar:focus-within {
+      background: white;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+    }
+    .search-bar input {
+      width: 100%;
+      padding: 12px 18px;
+      border: none;
+      background: transparent;
+      font-size: 0.95rem;
+      outline: none;
+    }
+    .search-bar button {
+      background: #ffffff;
+      border: none;
+      padding: 0 20px;
+      cursor: pointer;
+      color: #3b82f6;
+      font-size: 1.2rem;
+      transition: 0.2s;
+    }
+    .search-bar button:hover {
+      color: #1e40af;
+    }
+
+    .nav-icons {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .nav-icons a {
+      color: #334155;
+      text-decoration: none;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.95rem;
+      transition: 0.2s;
+    }
+    .nav-icons a:hover {
+      color: #2563eb;
+    }
+    .cart-icon {
+      position: relative;
+    }
+    .cart-count {
+      background: #dc2626;
+      color: white;
+      font-size: 0.7rem;
+      font-weight: bold;
+      border-radius: 30px;
+      padding: 2px 6px;
+      position: absolute;
+      top: -10px;
+      right: -14px;
+    }
+
+    /* Hero banner */
+    .hero {
+      background: linear-gradient(105deg, #0f172a 0%, #1e293b 100%);
+      color: white;
+      margin: 24px 0 32px;
+      border-radius: 32px;
+      padding: 48px 40px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .hero-content h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .hero-content p {
+      font-size: 1.1rem;
+      opacity: 0.85;
+      max-width: 500px;
+      margin-bottom: 24px;
+    }
+    .btn-primary {
+      background: #3b82f6;
+      color: white;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 40px;
+      font-weight: 600;
+      display: inline-block;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+    .btn-primary:hover {
+      background: #2563eb;
+      transform: translateY(-2px);
+    }
+    .hero-badge {
+      background: rgba(255,255,255,0.15);
+      border-radius: 60px;
+      padding: 6px 16px;
+      font-size: 0.8rem;
+      width: fit-content;
+    }
+
+    /* filters / category chips */
+    .category-filter {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 32px 0 24px;
+    }
+    .chip {
+      background: #eef2ff;
+      padding: 8px 18px;
+      border-radius: 40px;
+      font-weight: 500;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 1px solid transparent;
+    }
+    .chip.active {
+      background: #2563eb;
+      color: white;
+      box-shadow: 0 4px 8px rgba(37,99,235,0.2);
+    }
+    .chip:hover:not(.active) {
+      background: #e0e7ff;
+    }
+
+    /* product grid */
+    .section-title {
+      font-size: 1.7rem;
+      font-weight: 700;
+      margin: 24px 0 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 28px;
+      margin-bottom: 60px;
+    }
+    .product-card {
+      background: white;
+      border-radius: 24px;
+      overflow: hidden;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      border: 1px solid #eef2ff;
+    }
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 25px -12px rgba(0,0,0,0.1);
+      border-color: #cbd5e1;
+    }
+    .product-img {
+      background: #f8fafc;
+      text-align: center;
+      padding: 32px 16px;
+      font-size: 3.5rem;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .product-info {
+      padding: 20px;
+    }
+    .product-brand {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+      color: #3b82f6;
+    }
+    .product-name {
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin: 6px 0 8px;
+    }
+    .product-specs {
+      font-size: 0.8rem;
+      color: #475569;
+      margin-bottom: 12px;
+      display: flex;
+      gap: 12px;
+    }
+    .price {
+      font-weight: 800;
+      font-size: 1.5rem;
+      color: #0f172a;
+      margin: 10px 0;
+    }
+    .old-price {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      text-decoration: line-through;
+      margin-left: 8px;
+      font-weight: normal;
+    }
+    .btn-add {
+      width: 100%;
+      background: #f1f5f9;
+      border: none;
+      padding: 10px;
+      border-radius: 40px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: 0.2s;
+      color: #1e293b;
+    }
+    .btn-add:hover {
+      background: #3b82f6;
+      color: white;
+    }
+    .rating {
+      color: #fbbf24;
+      font-size: 0.8rem;
+      margin-top: 8px;
+    }
+
+    /* footer */
+    .footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      padding: 48px 0 24px;
+      margin-top: 48px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+    .footer-col h4 {
+      color: white;
+      margin-bottom: 16px;
+    }
+    .footer-col p, .footer-col a {
+      color: #94a3b8;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 8px;
+    }
+    .copyright {
+      text-align: center;
+      padding-top: 24px;
+      border-top: 1px solid #1e293b;
+    }
+
+    /* django message styling simulation */
+    .toast-msg {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #1e293b;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 60px;
+      font-size: 0.9rem;
+      z-index: 200;
+      display: none;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+    }
+    @media (max-width: 700px) {
+      .navbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .search-bar {
+        max-width: 100%;
+      }
+      .hero {
+        text-align: center;
+        justify-content: center;
+      }
+      .hero-content p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- Django template context: 
+     This template is ready to integrate with Django.
+     Expected context variables (example):
+     - products: list of phone objects with fields: id, name, brand, price, old_price, specs, rating, image_icon, category
+     - cart_count: integer (number of items in cart)
+     - user (optional)
+     It also uses CSRF token for POST forms / add-to-cart.
+     The template includes example static data but loops through dynamic products.
+-->
+
+<header class="site-header">
+  <div class="container">
+    <div class="navbar">
+      <div class="logo">
+        <h2>PhoneMarket <span>⚡ flagship deals</span></h2>
+      </div>
+      <div class="search-bar">
+        <input type="text" placeholder="Search for iPhone, Samsung, Pixel..." id="searchInput" aria-label="Search phones">
+        <button id="searchBtn"><i class="fas fa-search"></i></button>
+      </div>
+      <div class="nav-icons">
+        <a href="#"><i class="fas fa-heart"></i> Wishlist</a>
+        <a href="#" class="cart-icon" id="cartLink">
+          <i class="fas fa-shopping-bag"></i> Cart
+          <span class="cart-count" id="cartCountDisplay">{% if cart_count %}{{ cart_count }}{% else %}0{% endif %}</span>
+        </a>
+        <a href="#"><i class="fas fa-user-circle"></i> Account</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <!-- Hero promo -->
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-badge"><i class="fas fa-bolt"></i> Spring Sale up to -25%</div>
+      <h1>Find your next<br>smartphone</h1>
+      <p>Latest models, exclusive discounts, and trusted sellers. Free shipping on orders over $500.</p>
+      <a href="#" class="btn-primary">Shop Now →</a>
+    </div>
+    <div class="hero-icon">
+      <i class="fas fa-mobile-alt" style="font-size: 120px; opacity: 0.7;"></i>
+    </div>
+  </div>
+
+  <!-- Category chips (filter demo) -->
+  <div class="category-filter" id="categoryFilter">
+    <span class="chip active" data-cat="all">All phones</span>
+    <span class="chip" data-cat="Apple">Apple</span>
+    <span class="chip" data-cat="Samsung">Samsung</span>
+    <span class="chip" data-cat="Google">Google Pixel</span>
+    <span class="chip" data-cat="Xiaomi">Xiaomi</span>
+    <span class="chip" data-cat="OnePlus">OnePlus</span>
+    <span class="chip" data-cat="Hoco">Hoco</span>
+  </div>
+
+  <!-- Products section -->
+  <div class="section-title">
+    <span>🔥 Trending smartphones</span>
+    <span style="font-size: 0.9rem; font-weight: normal;"><i class="fas fa-store"></i> Trusted marketplace</span>
+  </div>
+
+  <div class="product-grid" id="productGrid">
+    <!-- Django will dynamically generate product cards here. 
+         We also provide sample static fallback data to show design, but will be replaced by Django template tags.
+         For demonstration we render with Django for loop syntax, plus we add a JS fallback for interactive filtering.
+         But we'll build the HTML so that it uses Django context variable 'products'.
+    -->
+    {% if products %}
+      {% for phone in products %}
+        <div class="product-card" data-category="{{ phone.category|default:phone.brand }}" data-name="{{ phone.name|lower }}" data-price="{{ phone.price }}">
+          <div class="product-img">
+            {% if phone.icon_class %}
+              <i class="{{ phone.icon_class }}"><img src="{{phone.image.url}}"class="hello"></i>
+            {% else %}
+              <i class="fas fa-mobile-screen-button"></i>
+            {% endif %}
+          </div>
+          <div class="product-info">
+            <div class="product-brand">{{ phone.brand|upper }}</div>
+            <div class="product-name">{{ phone.name }}</div>
+            <div class="product-specs">
+              <span><i class="fas fa-microchip"></i> {{ phone.specs.short|default:"8GB/128GB" }}</span>
+              <span><i class="fas fa-camera"></i> {{ phone.specs.camera|default:"48MP" }}</span>
+            </div>
+            <div class="price">
+              DA{{ phone.price }}
+              {% if phone.old_price %}
+                <span class="old-price">DA{{ phone.old_price }}</span>
+              {% endif %}
+            </div>
+            <div class="rating">
+
+              <span style="color:#64748b;">({{ phone.reviews_count|default:"127" }})</span>
+            </div>
+            <button class="btn-add add-to-cart-btn" data-id="{{ phone.id }}" data-name="{{ phone.name }}" data-price="{{ phone.price }}">
+              <i class="fas fa-cart-plus"></i> Add to cart
+            </button>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <!-- fallback static products for demo when no Django context or preview (pure HTML/CSS) -->
+      <div class="product-card" data-category="Apple" data-name="iphone 15 pro">
+        <div class="product-img"><i class="fab fa-apple" style="font-size: 3rem;"></i></div>
+        <div class="product-info"><div class="product-brand">APPLE</div><div class="product-name">iPhone 15 Pro</div><div class="product-specs"><span>A17 Pro</span><span>48MP triple</span></div><div class="price">$999 <span class="old-price">$1099</span></div><div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><span> (892)</span></div><button class="btn-add add-to-cart-btn" data-id="101" data-name="iPhone 15 Pro" data-price="999"><i class="fas fa-cart-plus"></i> Add to cart</button></div>
+      </div>
+      <div class="product-card" data-category="Samsung" data-name="galaxy s24 ultra">
+        <div class="product-img"><i class="fab fa-android" style="font-size: 3rem;"></i></div>
+        <div class="product-info"><div class="product-brand">SAMSUNG</div><div class="product-name">Galaxy S24 Ultra</div><div class="product-specs"><span>Snapdragon 8 Gen 3</span><span>200MP</span></div><div class="price">$1199</div><div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><span> (1.2k)</span></div><button class="btn-add add-to-cart-btn" data-id="102" data-name="Galaxy S24 Ultra" data-price="1199"><i class="fas fa-cart-plus"></i> Add to cart</button></div>
+      </div>
+      <div class="product-card" data-category="Google" data-name="pixel 8 pro">
+        <div class="product-img"><i class="fab fa-google" style="font-size: 3rem;"></i></div>
+        <div class="product-info"><div class="product-brand">GOOGLE</div><div class="product-name">Pixel 8 Pro</div><div class="product-specs"><span>Tensor G3</span><span>50MP + AI</span></div><div class="price">$899 <span class="old-price">$999</span></div><div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><span> (654)</span></div><button class="btn-add add-to-cart-btn" data-id="103" data-name="Pixel 8 Pro" data-price="899"><i class="fas fa-cart-plus"></i> Add to cart</button></div>
+      </div>
+      <div class="product-card" data-category="Xiaomi" data-name="xiaomi 13t pro">
+        <div class="product-img"><i class="fas fa-microchip" style="font-size: 3rem;"></i></div>
+        <div class="product-info"><div class="product-brand">XIAOMI</div><div class="product-name">13T Pro</div><div class="product-specs"><span>Leica optics</span><span>144Hz</span></div><div class="price">$749</div><div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><span> (312)</span></div><button class="btn-add add-to-cart-btn" data-id="104" data-name="Xiaomi 13T Pro" data-price="749"><i class="fas fa-cart-plus"></i> Add to cart</button></div>
+      </div>
+      <div class="product-card" data-category="OnePlus" data-name="oneplus 12">
+        <div class="product-img"><i class="fas fa-bolt" style="font-size: 3rem;"></i></div>
+        <div class="product-info"><div class="product-brand">ONEPLUS</div><div class="product-name">OnePlus 12</div><div class="product-specs"><span>16GB RAM</span><span>5400mAh</span></div><div class="price">$799</div><div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><span> (478)</span></div><button class="btn-add add-to-cart-btn" data-id="105" data-name="OnePlus 12" data-price="799"><i class="fas fa-cart-plus"></i> Add to cart</button></div>
+      </div>
+      <div class="product-card" data-category="Apple" data-name="iphone 14">
+        <div class="product-img"><i class="fab fa-apple" style="font-size: 3rem;"></i></div>
+        <div class="product-info"><div class="product-brand">APPLE</div><div class="product-name">iPhone 14</div><div class="product-specs"><span>A15 Bionic</span><span>Dual 12MP</span></div><div class="price">$699 <span class="old-price">$799</span></div><div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><span> (1k)</span></div><button class="btn-add add-to-cart-btn" data-id="106" data-name="iPhone 14" data-price="699"><i class="fas fa-cart-plus"></i> Add to cart</button></div>
+      </div>
+    {% endif %}
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col"><h4>PhoneMarket</h4><p>Your trusted marketplace for new & refurbished phones.</p><p><i class="fas fa-shield-alt"></i> Buyer protection</p></div>
+      <div class="footer-col"><h4>Support</h4><a href="#">Help Center</a><a href="#">Returns</a><a href="#">Warranty</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="#">About</a><a href="#">Sell on PhoneMarket</a><a href="#">Affiliate</a></div>
+      <div class="footer-col"><h4>Follow</h4><a href="#"><i class="fab fa-instagram"></i> Instagram</a><a href="#"><i class="fab fa-twitter"></i> Twitter</a></div>
+    </div>
+    <div class="copyright">© 2025 PhoneMarket – Django Marketplace. All rights reserved.</div>
+  </div>
+</footer>
+
+<div id="toastMsg" class="toast-msg"><i class="fas fa-check-circle"></i> <span id="toastText">Added to cart</span></div>
+
+<!-- frontend interactive cart & filtering (works with Django + demo) -->
+<script>
+  // Simple Cart simulation (frontend, but you can integrate with Django endpoints)
+  let cart = JSON.parse(localStorage.getItem('phoneMarketCart')) || [];
+
+  function updateCartUI() {
+    const cartCountSpan = document.getElementById('cartCountDisplay');
+    if (cartCountSpan) {
+      let totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+      cartCountSpan.innerText = totalItems;
+      localStorage.setItem('phoneMarketCart', JSON.stringify(cart));
+    }
+  }
+
+  function showToast(message) {
+    const toast = document.getElementById('toastMsg');
+    const toastText = document.getElementById('toastText');
+    toastText.innerText = message;
+    toast.style.display = 'flex';
+    setTimeout(() => {
+      toast.style.display = 'none';
+    }, 2000);
+  }
+
+  function addToCart(productId, productName, price) {
+    const existing = cart.find(item => item.id == productId);
+    if (existing) {
+      existing.quantity += 1;
+      showToast(`${productName} quantity updated (+1)`);
+    } else {
+      cart.push({ id: productId, name: productName, price: parseFloat(price), quantity: 1 });
+      showToast(`${productName} added to cart!`);
+    }
+    updateCartUI();
+    // Also send Django cart update via fetch if needed? we keep it flexible
+    // For real Django, attach CSRF token and POST to '/add-to-cart/'
+    if (typeof djangoCartUrl !== 'undefined') {
+      fetch(djangoCartUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-CSRFToken': getCsrfToken() },
+        body: JSON.stringify({ product_id: productId, quantity: 1 })
+      }).catch(e => console.warn("Django sync optional"));
+    }
+  }
+
+  // Helper for CSRF token (Django)
+  function getCsrfToken() {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.substring(0, 10) === 'csrftoken=') {
+          cookieValue = decodeURIComponent(cookie.substring(10));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+
+  // Attach event listeners to all add-to-cart buttons (dynamic and static)
+  function bindAddToCartButtons() {
+    document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+      // remove previous listener to avoid duplicates
+      btn.removeEventListener('click', btn._listener);
+      const handler = (e) => {
+        e.preventDefault();
+        const id = btn.getAttribute('data-id');
+        const name = btn.getAttribute('data-name');
+        const price = btn.getAttribute('data-price');
+        addToCart(id, name, price);
+      };
+      btn.addEventListener('click', handler);
+      btn._listener = handler;
+    });
+  }
+
+  // filter products by category (client side)
+  function filterProducts(category) {
+    const cards = document.querySelectorAll('.product-card');
+    cards.forEach(card => {
+      const cardCat = card.getAttribute('data-category');
+      if (category === 'all' || cardCat === category) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  // search functionality
+  function searchProducts(query) {
+    const cards = document.querySelectorAll('.product-card');
+    const lowerQuery = query.toLowerCase().trim();
+    cards.forEach(card => {
+      const name = card.getAttribute('data-name') || '';
+      if (lowerQuery === '' || name.includes(lowerQuery)) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+    // reset category active chip to 'all' if search is used, but keep UX smooth
+    document.querySelectorAll('.chip').forEach(ch => ch.classList.remove('active'));
+    const allChip = document.querySelector('.chip[data-cat="all"]');
+    if (allChip) allChip.classList.add('active');
+  }
+
+  // event listeners for categories
+  function initFilters() {
+    const chips = document.querySelectorAll('.chip');
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        const category = chip.getAttribute('data-cat');
+        // update active class
+        chips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        filterProducts(category);
+        // clear search input to avoid conflict, but keep consistent
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput) searchInput.value = '';
+      });
+    });
+    const searchBtn = document.getElementById('searchBtn');
+    const searchInput = document.getElementById('searchInput');
+    if (searchBtn && searchInput) {
+      const performSearch = () => searchProducts(searchInput.value);
+      searchBtn.addEventListener('click', performSearch);
+      searchInput.addEventListener('keyup', (e) => { if (e.key === 'Enter') performSearch(); });
+    }
+  }
+
+  // set product data-name fallback for static items
+  document.querySelectorAll('.product-card').forEach(card => {
+    const nameEl = card.querySelector('.product-name');
+    if (nameEl && !card.getAttribute('data-name')) {
+      card.setAttribute('data-name', nameEl.innerText.toLowerCase());
+    }
+    const brandEl = card.querySelector('.product-brand');
+    if (brandEl && !card.getAttribute('data-category')) {
+      let brandText = brandEl.innerText.trim();
+      if (brandText === 'APPLE') card.setAttribute('data-category', 'Apple');
+      else if (brandText === 'SAMSUNG') card.setAttribute('data-category', 'Samsung');
+      else if (brandText === 'GOOGLE') card.setAttribute('data-category', 'Google');
+      else if (brandText === 'XIAOMI') card.setAttribute('data-category', 'Xiaomi');
+      else if (brandText === 'OnePlus') card.setAttribute('data-category', 'OnePlus');
+      else if (brandText === 'HOCO') card.setAttribute('data-category', 'Hoco');
+
+      else card.setAttribute('data-category', brandText);
+    }
+  });
+
+  // initial update
+  updateCartUI();
+  bindAddToCartButtons();
+  initFilters();
+
+  // optional cart link counter display with cart summary alert
+  const cartLink = document.getElementById('cartLink');
+  if (cartLink) {
+    cartLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      let total = cart.reduce((sum, i) => sum + (i.price * i.quantity), 0);
+      showToast(`Cart: ${cart.reduce((s,i)=>s+i.quantity,0)} items · DA${total.toFixed(2)}`);
+    });
+  }
+</script>
+</body>
+</html>

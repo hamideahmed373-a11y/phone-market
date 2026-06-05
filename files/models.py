@@ -18,7 +18,7 @@ class Phone(models.Model):
     short=models.CharField()
     camera=models.CharField()
     old_price=models.IntegerField(null=True,blank=True)
-    image=CloudinaryField(upload_to='uploads')
+    icon = CloudinaryField('images',null=True)
 
 
 

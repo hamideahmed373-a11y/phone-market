@@ -451,7 +451,7 @@
         <div class="product-card" data-category="{{ phone.category|default:phone.brand }}" data-name="{{ phone.name|lower }}" data-price="{{ phone.price }}">
           <div class="product-img">
             {% if phone.icon_class %}
-              <i class="{{ phone.icon_class }}"><img src="{{phone.image.url}}"class="hello"></i>
+              <i class="{{ phone.icon_class }}"><img src="{{phone.icon.url}}"class="hello"></i>
             {% else %}
               <i class="fas fa-mobile-screen-button"></i>
             {% endif %}
